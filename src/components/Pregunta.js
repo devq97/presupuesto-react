@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import Error from "./Error";
 
-const Pregunta = () => {
+const Pregunta = ({guardarPresupuesto, guardarRestante, actualizarPregunta}) => {
 
   const [ cantidad, guardarCantidad ] = useState(0);
   const [ error, guardarError ] = useState(false);
@@ -13,12 +13,15 @@ const Pregunta = () => {
   const agregarPresupuesto = e => {
     e.preventDefault();
 
-    if(cantidad < 1 || isNaN(cantidad)) {
+    if (cantidad < 1 || isNaN(cantidad)) {
       guardarError(true);
       return;
     }
 
     guardarError(false);
+    guardarPresupuesto(cantidad);
+    guardarRestante(cantidad);
+    actualizarPregunta(false);
   };
 
   return (
