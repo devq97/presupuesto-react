@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import Error from "./Error";
 
 const Pregunta = () => {
 
@@ -11,12 +12,20 @@ const Pregunta = () => {
 
   const agregarPresupuesto = e => {
     e.preventDefault();
-    
+
+    if(cantidad < 1 || isNaN(cantidad)) {
+      guardarError(true);
+      return;
+    }
+
+    guardarError(false);
   };
 
   return (
     <Fragment>
       <h2>Coloca tu presupuesto</h2>
+
+      { error ? <Error mensaje="Hubo un error" /> : null }
 
       <form
         onSubmit={agregarPresupuesto}
